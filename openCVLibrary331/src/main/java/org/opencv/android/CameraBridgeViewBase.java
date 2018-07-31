@@ -397,6 +397,18 @@ public abstract class CameraBridgeViewBase extends SurfaceView implements Surfac
         boolean bmpValid = true;
         if (modified != null) {
             try {
+
+                /**
+                 *
+                 注意这里要重新分配bitmap，否则旋转图片后啃根无法看到预览
+                 因为缓存图像的大小和旋转后的图片大小不一致
+                 */
+
+                if(null != mCacheBitmap){
+                    mCacheBitmap.recycle();
+                    mCacheBitmap = Bitmap.createBitmap(modified.width(),modified.height(), Bitmap.Config.ARGB_8888);
+                }
+
                 Utils.matToBitmap(modified, mCacheBitmap);
             } catch(Exception e) {
                 Log.e(TAG, "Mat type: " + modified);

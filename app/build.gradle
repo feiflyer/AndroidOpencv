@@ -13,6 +13,9 @@ android {
 
             cmake {
                 cppFlags "-std=c++11"
+
+                // 这句解决的问题是c++ 函数 detectMultiScale编译不过的问题
+                arguments '-DANDROID_STL=gnustl_static'
             }
 
             ndk {

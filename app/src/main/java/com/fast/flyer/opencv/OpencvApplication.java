@@ -10,5 +10,6 @@ public class OpencvApplication extends Application{
     public void onCreate() {
         super.onCreate();
         OpenCVLoader.initDebug();
+        System.loadLibrary("native-lib");
     }
 }
